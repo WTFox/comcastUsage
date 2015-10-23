@@ -9,8 +9,8 @@ import requests
 
 USERNAME = ''
 PASSWORD = ''
-LOGIN_URL = 'http://umcs.comcast.net/usage_meter/login/uid?callback=?'
-USAGE_URL = 'http://umcs.comcast.net/usage_meter/usage/current'
+LOGIN_URL = 'https://umcs.comcast.net/usage_meter/login/uid?callback=?'
+USAGE_URL = 'https://umcs.comcast.net/usage_meter/usage/current'
 
 def get_usage():
     ''' A list of items that are accessible:
