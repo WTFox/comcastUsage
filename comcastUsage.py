@@ -3,6 +3,7 @@ __author__ = 'wtfox'
 from xml.etree import ElementTree
 from datetime import datetime
 import sys
+import calendar
 
 import requests
 
@@ -50,23 +51,27 @@ def get_usage():
 
     resp = requests.post(USAGE_URL, data=usage_payload)
     tree = ElementTree.fromstring(resp.content)
-
     end_date = tree.find('device').find('counter_end').text
-    end_date = datetime.strptime(end_date, "%Y-%m-%dT%H:%M:%S.%fZ").strftime('%m/%d/%y')
     usage_remaining = tree.find('device').find('usage_remaining').text
     usage_percent = tree.find('device').find('usage_percent').text
     usage_allowable = tree.find('device').find('usage_allowable').text
     usage_total = tree.find('device').find('usage_total').text
 
+    end_date = datetime.strptime(end_date, "%Y-%m-%dT%H:%M:%S.%fZ").strftime('%m/%d/%y')
+    now = datetime.now()
+    days_in_mon = calendar.monthrange(now.year, now.month)[1]
+    perc = float(now.day) / float(days_in_mon) * 100
 
     print("")
     print("Comcast/Xfinity Data Usage for the Month.")
     print("-"*80)
     print("{}% of data used".format(usage_percent))
+    print("{}% through the month.".format(int(perc)))
     print("{} GBs remaining until {}.".format(usage_remaining, end_date))
     print("{} GBs / {}GBs used.".format(usage_total, usage_allowable))
     print("-"*80)
     print("")
+
     sys.exit(0)
 
 
