@@ -8,7 +8,7 @@ setup(name='comcast-usage',
       version="0.9.0",
       description='A simple script for checking your Comcast data usage',
       author='Anthony Fox',
-      author_email='anthonyfox1986@gmail.com',
+      author_email='anthonyfox1988@gmail.com',
       license='MIT',
       url='https://github.com/wtfox/comcastUsage',
       modules=['comcastUsage'],
@@ -28,4 +28,3 @@ setup(name='comcast-usage',
           'Programming Language :: Python :: 3',
           'Topic :: Utilities'
       ])
-
