@@ -1,5 +1,6 @@
 __author__ = 'wtfox'
 
+import os
 from xml.etree import ElementTree
 from datetime import datetime
 import sys
@@ -7,8 +8,8 @@ import calendar
 
 import requests
 
-USERNAME = ''
-PASSWORD = ''
+USERNAME = os.environ.get('COMCAST_USERNAME')
+PASSWORD = os.environ.get('COMCAST_PASSWORD')
 LOGIN_URL = 'https://umcs.comcast.net/usage_meter/login/uid?callback=?'
 USAGE_URL = 'https://umcs.comcast.net/usage_meter/usage/current'
 
@@ -32,6 +33,10 @@ def get_usage():
         <Element 'additional_billable_cost_per_block' at 0x02D0DEA0>
         <Element 'additional_billable_blocks_used' at 0x02D0DF00>
     '''
+
+    if USERNAME is None or PASSWORD is None:
+        print("Error: Username and Password are required")
+        sys.exit(1)
 
     login_payload = {
         'username': USERNAME,
