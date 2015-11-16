@@ -1,4 +1,4 @@
-__author__ = 'wtfox'
+from __future__ import absolute_import, division, print_function
 
 import os
 from xml.etree import ElementTree
@@ -7,6 +7,8 @@ import sys
 import calendar
 
 import requests
+
+__author__ = 'wtfox'
 
 USERNAME = os.environ.get('COMCAST_USERNAME')
 PASSWORD = os.environ.get('COMCAST_PASSWORD')
