@@ -12,8 +12,9 @@ __author__ = 'wtfox'
 
 USERNAME = os.environ.get('COMCAST_USERNAME')
 PASSWORD = os.environ.get('COMCAST_PASSWORD')
+COMCAST_API_VERSION = 4.1
 LOGIN_URL = 'https://umcs.comcast.net/usage_meter/login/uid?callback=?'
-USAGE_URL = 'https://umcs.comcast.net/usage_meter/usage/current'
+USAGE_URL = 'https://umcs.comcast.net/usage_meter/usage/accountCurrent'
 
 def get_usage():
     ''' A list of items that are accessible:
@@ -43,7 +44,7 @@ def get_usage():
     login_payload = {
         'username': USERNAME,
         'password': PASSWORD,
-        'version': 4.0
+        'version': COMCAST_API_VERSION
     }
 
     resp = requests.post(LOGIN_URL, data=login_payload)
@@ -53,18 +54,18 @@ def get_usage():
     usage_payload = {
         'username': USERNAME,
         'access_token': access_token,
-        'version': 4.0
+        'version': COMCAST_API_VERSION
     }
 
     resp = requests.post(USAGE_URL, data=usage_payload)
     tree = ElementTree.fromstring(resp.content)
-    end_date = tree.find('device').find('counter_end').text
-    usage_remaining = tree.find('device').find('usage_remaining').text
-    usage_percent = tree.find('device').find('usage_percent').text
-    usage_allowable = tree.find('device').find('usage_allowable').text
-    usage_total = tree.find('device').find('usage_total').text
+    end_date = tree.find('account').find('counter_end').text
+    usage_remaining = tree.find('account').find('usage_remaining').text
+    usage_percent = tree.find('account').find('usage_percent').text
+    usage_allowable = tree.find('account').find('usage_allowable').text
+    usage_total = tree.find('account').find('usage_total').text
 
-    end_date = datetime.strptime(end_date, "%Y-%m-%dT%H:%M:%S.%fZ").strftime('%m/%d/%y')
+    end_date = datetime.strptime(end_date, "%Y-%m-%dZ").strftime('%m/%d/%y')
     now = datetime.now()
     days_in_mon = calendar.monthrange(now.year, now.month)[1]
     perc = float(now.day) / float(days_in_mon) * 100
@@ -72,7 +73,7 @@ def get_usage():
     print("")
     print("Comcast/Xfinity Data Usage for the Month.")
     print("-"*80)
-    print("{}% of data used".format(usage_percent))
+    print("{:d}% of data used".format(int(float(usage_percent))))
     print("{}% through the month.".format(int(perc)))
     print("{} GBs remaining until {}.".format(usage_remaining, end_date))
     print("{} GBs / {}GBs used.".format(usage_total, usage_allowable))
