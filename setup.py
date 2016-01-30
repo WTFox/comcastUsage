@@ -5,7 +5,7 @@ entry_points = {
 }
 
 setup(name='comcast-usage',
-      version="0.10.0",
+      version="0.11.0",
       description='A simple script for checking your Comcast data usage',
       author='Anthony Fox',
       author_email='anthonyfox1988@gmail.com',
