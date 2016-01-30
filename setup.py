@@ -13,7 +13,7 @@ setup(name='comcast-usage',
       url='https://github.com/wtfox/comcastUsage',
       modules=['comcastUsage'],
       install_requires=[
-          'requests==2.8.1'
+          'requests==2.9.1'
       ],
       entry_points=entry_points,
       keywords=['comcast', 'data usage', 'cli', 'script'],
