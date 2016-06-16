@@ -5,7 +5,7 @@ entry_points = {
 }
 
 setup(name='comcast-usage',
-      version="0.10.0",
+      version="0.11.0",
       description='A simple script for checking your Comcast data usage',
       author='Anthony Fox',
       author_email='anthonyfox1988@gmail.com',
@@ -13,7 +13,7 @@ setup(name='comcast-usage',
       url='https://github.com/wtfox/comcastUsage',
       modules=['comcastUsage'],
       install_requires=[
-          'requests==2.8.1'
+          'requests==2.9.1'
       ],
       entry_points=entry_points,
       keywords=['comcast', 'data usage', 'cli', 'script'],
