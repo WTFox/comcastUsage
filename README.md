@@ -1,3 +1,7 @@
+Note
+====
+Comcast has discontinued the api (along with it's desktop app) that this application used to obtain usage information.
+
 comcastUsage
 ============
 
